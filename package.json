@@ -1,17 +1,27 @@
 {
-	"scripts": {
+    "name": "Binlisdata",
+    "version": "0.0.1",
+    "description": "Binlist data api. Forked from github.com/binlist/data.",
+    "main": "index.js",
+    "scripts": {
 		"build:countries": "csv-parser ./countries.csv | JSONStream > ./build/countries.json",
 		"build:schemes": "csv-parser ./schemes.csv | JSONStream > ./build/schemes.json",
 		"build:ranges": "csv-parser ./ranges.csv | JSONStream > ./build/ranges.json",
 		"build": "npm run -s build:countries && npm run -s build:schemes && npm run -s build:ranges",
 		"check-ranges": "npm run -s build:countries && npm run -s build:schemes && node ./tools/check-ranges < ./ranges.csv",
-		"test": "npm run -s check-ranges"
+		"test": "npm run -s check-ranges",
+        "preinstall": "npm run -s build:ranges",
+        "start": "node index.js"
 	},
 	"dependencies": {
 		"csv-parser": "^1.9.3",
 		"csv-write-stream": "^1.0.0",
 		"deep-equal": "^1.0.1",
 		"JSONStream": "^1.0.7",
-		"through2-map": "^2.0.0"
-	}
+		"through2-map": "^2.0.0",
+        "ejs": "2.4.1",
+        "express": "4.13.3",
+        "csv-parse": "^1.2.0"
+	},
+    "license": "Apache License, Version 2.0"
 }

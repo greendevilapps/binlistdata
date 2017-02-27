@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Binlistdata</title>
+    </head>
+    <body>
+        <% if (jr && jr.success && jr.results) { %>
+            <p><b>Query</b>: <%= jr.query %></p>
+            <p><b>Results</b>: <%= jr.results.length %></p>
+            <br />
+            <% jr.results.forEach(function(el){ %>
+                <p><b>BIN/IIN number</b>: <%= el.iin_start %></p>
+                <p><b>Brand</b>: <%= el.scheme %></p>
+                <p><b>Country Code (ISO3166-1)</b>: <%= el.country %></p>
+                <p><b>Bank</b>: <%= el.bank_name %></p>
+                <p><b>Card Type</b>: <%= el.type %></p>
+            <% }); %>
+        <% } else { %>
+            <p><%= jr.message %></p>
+            <p><%= jr._debug %></p>
+        <% } %>
+    </body>
+</html>
