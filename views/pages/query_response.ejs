@@ -15,6 +15,14 @@
                 <p><b>Bank</b>: <%= el.bank_name %></p>
                 <p><b>Card Type</b>: <%= el.type %></p>
             <% }); %>
+        <% } else if ( jr && jr.success ) { %>
+            <p><b>Query</b>: <%= jr.query %></p>
+            <p><b>BIN/IIN number</b>: <%= jr.number.prefix %></p>
+            <p><b>Scheme</b>: <%= jr.scheme %></p>
+            <p><b>Country Code (ISO3166-1)</b>: <%= jr.country.alpha2 %></p>
+            <p><b>Country</b>: <%= jr.country.name %></p>
+            <p><b>Bank</b>: <%= jr.bank.name %></p>
+            <p><b>Card Type</b>: <%= jr.type %></p>
         <% } else { %>
             <p><%= jr.message %></p>
             <p><%= jr._debug %></p>

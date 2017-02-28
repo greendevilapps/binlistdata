@@ -12,16 +12,12 @@ app.get('/', function(request, response) {
   response.render('pages/index');
 });
 
-app.get('/query', function(request, response){
-    response.render('pages/index');
-});
-
-app.get('/q', function(request, response){
+function findResults(params){
     var jr = {
         success  : true
-        , query  : request.query.bin
-        , results: []
+        , query  : params.bin
     };
+    var results = [];
 
     if ( jr.query ) {
         try {
@@ -40,7 +36,7 @@ app.get('/q', function(request, response){
                 //     }
                 // }
                 if ( q1 === t1 ) {
-                    jr.results.push({
+                    results.push({
                         iin_start      : card[0]
                         , iin_end      : card[1]
                         , number_length: card[2]
@@ -57,6 +53,41 @@ app.get('/q', function(request, response){
                     });
                 }
             });
+
+            if ( results.length > 0 ) {
+                jr.scheme = results[0].scheme;
+                jr.number = {
+                    length: results[0].number_length
+                    , prefix: results[0].iin_start
+                };
+                jr.type = results[0].type;
+                jr.brand = results[0].brand;
+                jr.prepaid = !!results[0].prepaid;
+                jr.bank = {
+                    name: results[0].bank_name
+                    , logo: results[0].bank_logo
+                    , url: results[0].bank_url
+                    , city: results[0].bank_city
+                    , phone: results[0].bank_url
+                };
+                jr.country = {
+                    alpha2: results[0].country
+                    , name: null
+                    , numeric: null
+                    , latitude: null
+                    , longitude: null
+                };
+
+                var countries = parse(fs.readFileSync('countries.csv'), {delimiter: ','});
+                countries.forEach(function(row){
+                    if ( (row[0] + '') === (jr.country.alpha2 + '') ) {
+                        jr.country.name = row[1];
+                        jr.country.numeric = row[2];
+                        jr.country.latitude = row[3];
+                        jr.country.longitude = row[4];
+                    }
+                });
+            }
         }
         catch(E){
             jr.success = false;
@@ -69,21 +100,19 @@ app.get('/q', function(request, response){
         jr.message = "No bin was requested.";
     }
 
-    // response.format({
-    //     'text/html': function(){
-    //         response.render('pages/query_response', {
-    //             jr: jr
-    //         });
-    //     },
-    //     'application/json': function(){
-    //         response.json(jr);
-    //     },
-    //     'default': function() {
-    //         // log the request and respond with 406
-    //         res.status(406).send('Not Acceptable');
-    //     }
-    // });
-    response.json(jr);
+    return jr;
+}
+
+app.get('/q/:bin', function(request, response){
+    var jr = findResults(request.params);
+    response.render('pages/query_response', {
+        jr: jr
+    });
+});
+
+app.get('/api/v1/:bin', function(req, res){
+    var jr = findResults(req.params);
+    res.json(jr);
 });
 
 app.listen(app.get('port'), function() {
