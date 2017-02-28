@@ -12,6 +12,10 @@ app.get('/', function(request, response) {
   response.render('pages/index');
 });
 
+app.get('/query', function(request, response){
+    response.render('pages/index');
+});
+
 app.get('/q', function(request, response){
     var jr = {
         success  : true
@@ -65,20 +69,21 @@ app.get('/q', function(request, response){
         jr.message = "No bin was requested.";
     }
 
-    response.format({
-        'text/html': function(){
-            response.render('pages/query_response', {
-                jr: jr
-            });
-        },
-        'application/json': function(){
-            response.json(jr);
-        },
-        'default': function() {
-            // log the request and respond with 406
-            res.status(406).send('Not Acceptable');
-        }
-    });
+    // response.format({
+    //     'text/html': function(){
+    //         response.render('pages/query_response', {
+    //             jr: jr
+    //         });
+    //     },
+    //     'application/json': function(){
+    //         response.json(jr);
+    //     },
+    //     'default': function() {
+    //         // log the request and respond with 406
+    //         res.status(406).send('Not Acceptable');
+    //     }
+    // });
+    response.json(jr);
 });
 
 app.listen(app.get('port'), function() {
