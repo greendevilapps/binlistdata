@@ -66,17 +66,17 @@ app.get('/q', function(request, response){
     }
 
     response.format({
-        html: function(){
+        'text/html': function(){
             response.render('pages/query_response', {
                 jr: jr
             });
         },
-        json: function(){
+        'application/json': function(){
             response.json(jr);
+        },
+        'default': function() {
+            // log the request and respond with 406
+            res.status(406).send('Not Acceptable');
         }
     });
-});
-
-app.listen(app.get('port'), function() {
-  console.log('Node app is running on port', app.get('port'));
 });
