@@ -1,8 +1,11 @@
-# BinlistData
+# IIN / BIN list data
 
 This is a fork from [binlist/data](https://github.com/binlist/data).
 
 I have manually rolled most of the pull requests from there into this repository as well.
+
+This is a public repository of Issuer Identification Numbers ([IIN][IIN]) also called
+the "Bank Identification Numbers" ([BIN][BIN]).
 
 ## Full template
 
@@ -10,11 +13,6 @@ I have added the code needed to run this locally or on your own server.
 
 *Warning:* I am not a node.js dev, so this is my first time with this. If there are any issues Please
 add an issue or a pull request for me to fix anything.
-
------
-
-A public repository of Issuer Identification Numbers ([IIN][IIN]) also called
-the "Bank Identification Numbers" ([BIN][BIN]).
 
 ## Contributing
 
@@ -24,6 +22,10 @@ the "Bank Identification Numbers" ([BIN][BIN]).
 2. Edit or add your entry and make sure to keep the file alphabetical sorted by IIN/BIN.
 3. Test that everything works as expected by running `npm test`
 4. Send a pull request.
+
+-OR-
+
+Open an issue and I will do my best to get to it.
 
 ## Known issues
 
