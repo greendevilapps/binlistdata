@@ -9,7 +9,7 @@ the "Bank Identification Numbers" ([BIN][BIN]).
 
 ## Docs
 
-See the [wiki](http://github.com/greendevilapps/iinlist/wiki/API) for more info.
+See the [wiki](http://github.com/greendevilapps/iinlist/wiki/API-V1) for more info.
 
 ## Full template
 
