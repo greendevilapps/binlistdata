@@ -7,6 +7,10 @@ I have manually rolled most of the pull requests from there into this repository
 This is a public repository of Issuer Identification Numbers ([IIN][IIN]) also called
 the "Bank Identification Numbers" ([BIN][BIN]).
 
+## Docs
+
+See the [wiki](http://github.com/greendevilapps/iinlist/wiki/API) for more info.
+
 ## Full template
 
 I have added the code needed to run this locally or on your own server.
@@ -33,7 +37,7 @@ Open an issue and I will do my best to get to it.
 
 ## Credits
 
-This will also be part of *soon*.
+This will also be part of http://iinlist.greendevilapps.com/.
 
 This repository is part of http://www.binlist.net/
 
